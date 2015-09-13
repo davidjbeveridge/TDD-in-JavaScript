@@ -443,7 +443,7 @@ Where might I start?
 **What might be a convenient interface for that?** .red[†]
 
 .footnote[
-.red[†] THis is the most important question for BDD
+.red[†] This is the most important question for BDD
 ]
 
 ]
@@ -486,13 +486,13 @@ Specifications should be readable, both to humans.red[†], and to the machine.
 Start with the humans:
 
 ```txt
-TodoController#create creates a new Todo list
+TodoController.create creates a new Todo list
 ```
 
 Let the machine read the description:
 ```javascript
 describe('TodoController', function(){
-  describe('#create', function() {
+  describe('.create', function() {
     it('creates a new Todo list');
   })
 });
@@ -541,7 +541,7 @@ acceptance criteria
 ]
 .right-column[
 
-## Different flavors of specification/test
+## Different flavors of specification
 <img src="images/icecream.jpg" style="max-width: 100%" />
 
 ### Feature/Integration spec
@@ -564,7 +564,7 @@ Examples:
 ]
 .right-column[
 
-## Different flavors of specification/test
+## Different flavors of specification
 <img src="images/icecream.jpg" style="max-width: 100%" />
 
 ### Functional spec
@@ -587,7 +587,7 @@ Examples:
 ]
 .right-column[
 
-## Different flavors of specification/test
+## Different flavors of specification
 <img src="images/icecream.jpg" style="max-width: 100%" />
 
 ### Unit specs

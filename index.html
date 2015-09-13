@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="all" />
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse
+
+#TDD in JavaScript
+
+An incomplete guide
+
+
+---
+
+layout: false
+
+.left-column[
+  ## What will we cover?
+]
+.right-column[
+
+* What is (and isn't) TDD?
+* How do I TDD?
+* Questions
+
+]
+---
+
+.left-column[
+  ## What will we cover?
+  ## What *won't* we cover?
+]
+.right-column[
+* Performance Testing
+* Tool comparison
+
+]
+
+---
+
+class: center, middle, inverse
+
+# What is (and isn't) TDD?
+
+---
+
+.left-column[
+### The Big Lie
+]
+.right-column.center[
+## You have to write your *tests first*
+]
+
+---
+
+.left-column[
+### The Big Lie
+]
+.right-column.center.middle[
+## TDD == "Test Driven Development"
+
+*What do you think of when someone says "test"?*
+]
+
+---
+
+.left-column[
+### The Big Lie
+]
+.right-column.center.middle[
+## TDD == "Test Driven Development"
+
+*What do you think of when someone says "test"?*
+
+.left[
+* SAT, ACT, CSAP
+* SpaceX Test Launch
+* Polygraph test
+* Emissions testing
+* Medical tests
+* Metal purity tests (e.g., precious metals)
+]
+]
+
+---
+
+.left-column[
+### The Big Lie
+]
+
+.right-column.center.middle[
+## TDD == "Test Driven Development"
+
+*What do you think of when someone says "test"?*
+
+.left[
+* SAT, ACT, CSAP
+* SpaceX Test Launch
+* Polygraph test
+* Emissions testing
+* Medical tests
+* Metal purity tests (e.g., precious metals)
+]
+
+## What is testing?
+
+.left[
+  Proving, measuring, or confirming the veracity, authenticity, performance,
+  safety, completeness, purity, or other qualities of a system.
+]
+
+]
+
+---
+
+class: center, middle, inverse
+## *How can you test something that doesn't exist?*
+
+---
+
+class: center, middle, inverse
+## *How can you test something that doesn't exist?*
+
+## .red[You can't.]
+## You .red[-can-] specify behavior for something before you create it.
+
+---
+.left-column[
+### The Big Lie
+]
+.right-column.center.middle[
+## We specify behavior for things all the time:
+
+.left[
+* Penal Code
+* School Rules
+* Blueprints
+* Terms of Service
+* User Stories & Acceptance Criteria
+]
+]
+
+---
+
+class: center, middle, inverse
+
+# BDD: Behavior-Driven Development
+
+---
+
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+## In BDD
+
+* Specifications are written before code, on an as-you-go basis
+* BDD is a design tool
+]
+
+---
+
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+## Design tools **constrain** your solution.red[†]
+
+* Structured programming
+* Declarative programming
+  - SQL
+  - Logic programming
+* Object-orientation
+* Functional programming
+* Code style guides
+* Design Patterns
+* Immutability
+
+]
+
+.footnote[.red[†]Constraints are good!]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+* Specifications are written before code, on an as-you-go basis
+* BDD is a design tool
+  - Just another constraint on your implementation
+  - Forces an explicit public interface
+  - Helps you reason about the boundaries of your solution
+  - Encourages loose coupling of objects
+  - Automatic documentation for developers
+]
+
+---
+
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+* Specifications are written before code, on an as-you-go basis
+* BDD is a design tool
+* BDD is a debugging tool
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+* Specifications are written before code, on an as-you-go basis
+* BDD is a design tool
+* BDD is a debugging tool
+  - Automatically re-runs tests
+  - Displays a stack trace
+  - Making a single change at a time helps find bugs faster
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+* Specifications are written before code, on an as-you-go basis
+* BDD is a design tool
+* BDD is a debugging tool
+* Proof of correctness
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+## Proof of correctness
+> [P]rogram .medium[testing] can be a very effective way to show the presence of
+> .medium[bugs], but .medium[is hopelessly inadequate for showing their absence]. [...]
+
+> But one should not first make the program and then
+> prove its correctness [...]
+
+> On the contrary: the
+> programmer should let correctness .medium[proof and program grow hand in hand]. [...]
+
+> If one first
+> asks oneself what the structure of a convincing proof would be and, having
+> found this, then constructs a program satisfying this proof’s requirements,
+> then these correctness concerns turn out to be a .medium[very effective heuristic]
+> guidance.
+
+&mdash;Edsger W. Dijkstra, The Humble Programmer (1972)
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+]
+.right-column[
+* Specifications for software's behavior
+  - Writen before your implementation
+* Design Tool
+* Debugging Tool
+* Proof of correctness
+  - Requires intelligible program requirements
+  - Adequate proof of correct behavior (i.e., covers all edge cases)
+  - Reasoned and written along with the program, not afterward
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+### What isn't BDD?
+]
+.right-column[
+## BDD is not
+* A perfect silver bullet
+* Always the right solution
+* Proof of a developer's skill/professionalism
+* A complete replacement for up-front design
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+### What isn't BDD?
+### The Bad Parts
+]
+.right-column[
+* Jerks and Dogma ruin everything
+* Learning Curve
+  - Tools
+  - Thinking spec-first
+  - Refactoring
+  - Design
+  - Brittle vs. flexible specs
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+### What isn't BDD?
+### The Bad Parts
+### The Good Parts
+]
+.right-column[
+* Less remembering stuff
+* Fast feedback about your code
+* Clear boundaries for refactoring
+* (Some) assurance against regression
+* A design document your team can read
+* Complements existing tools
+]
+
+---
+.left-column[
+### The Big Lie
+### What is BDD?
+### What isn't BDD?
+### The Bad Parts
+### The Good Parts
+### Existing Tools
+]
+.right-column[
+## SOLID
+
+Introduced by Michael Feathers & Robert C. Martin
+
+* **S**ingle Responsibility Principle
+* **O**pen/Closed Principle
+* **L**iskov Substitution Principle
+* **I**nterface Segregation Principle
+* **D**ependency Inversion Principle
+
+https://en.wikipedia.org/wiki/Solid_%28object-oriented_design%29
+
+http://cleancoders.com/category/solid-principles#videos
+]
+
+---
+
+.left-column[
+### The Big Lie
+### What is BDD?
+### What isn't BDD?
+### The Bad Parts
+### The Good Parts
+### Existing Tools
+]
+.right-column[
+## Refactoring 
+
+
+Martin C. Fowler
+
+noun: a *change* made to the internal *structure of software* to make it easier
+to understand and cheaper to modify *without changing its observable behavior*
+
+verb: to restructure software by applying a series of refactorings without
+changing its observable behavior
+
+http://refactoring.com/
+]
+
+---
+
+class: center, middle, inverse
+# How do I BDD? 
+
+---
+
+
+.left-column[
+## Red, Green, Refactor
+]
+.right-column[
+
+.red[
+## 1. Red
+]
+
+Write a spec, and make sure it fails for the right reason.
+
+.green[
+## 2. Green
+]
+
+Write just enough code to make the new spec pass. All other specs should still
+pass, too.
+
+## 3. Refactor
+
+Optimize the code to make it easier to make the next change
+
+Improve the clarity of the code
+
+Change the code, not the specs
+
+The specs should pass when you're done
+
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+]
+.right-column[
+## Outside-in
+
+Start with use cases
+
+Prevent making decisions about the edges of the architecture
+
+## Start with questions
+
+What will this feature do?
+
+Where might I start?
+
+**What might be a convenient interface for that?** .red[†]
+
+.footnote[
+.red[†] THis is the most important question for BDD
+]
+
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+]
+.right-column[
+## When things get sticky, it's a sign
+
+<img src="images/dirty-harry.jpg" style="max-width: 35%; float: right" />
+### Ask yourself...
+
+Why is this so darn hard?
+
+Is this object/method handling too many responsibilities?
+
+How can I avoid making a decision?
+
+Is there a more convenient way to think about this interface?
+
+How could the code be clearer?
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+## English
+
+Specifications should be readable, both to humans.red[†], and to the machine.
+
+Start with the humans:
+
+```txt
+TodoController#create creates a new Todo list
+```
+
+Let the machine read the description:
+```javascript
+describe('TodoController', function(){
+  describe('#create', function() {
+    it('creates a new Todo list');
+  })
+});
+```
+.footnote[
+.red[†]
+*Yes, programmers are still classified as human*
+]
+
+]
+
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+## English
+
+There are other specification formats, like Gherkin.red[†]
+
+<img src="images/pickle.jpg" style="max-width: 150px" />
+
+```gherkin
+Given I am signed into the Todo application
+When I click on the New List button
+Then I should see a form for creating a new Todo List
+```
+
+.footnote[
+.red[†] Gherkin is a human-readable format, designed to match a style common to
+acceptance criteria
+]
+]
+
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Different flavors of specification/test
+<img src="images/icecream.jpg" style="max-width: 100%" />
+
+### Feature/Integration spec
+
+*Specifies an entire feature, end-to-end*
+
+Examples:
+
+- Full-blown user tests, driven via UI automation
+- API/request specs
+
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Different flavors of specification/test
+<img src="images/icecream.jpg" style="max-width: 100%" />
+
+### Functional spec
+
+*Specifies how two or more modules/systems should behave when used together*
+
+Examples:
+
+- Controller specs
+- Event-based Backbone/React View spec
+
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Different flavors of specification/test
+<img src="images/icecream.jpg" style="max-width: 100%" />
+
+### Unit specs
+
+*Specifies the behavior of a single module in isolation*
+
+Examples:
+
+- Service Object spec
+- Presenter spec
+- Model spec
+- BackBone/React Views spec
+
+]
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Black-box specification
+
+<img src="images/black-box.png" style="max-width: 150px" />
+
+*Given some input, you expect some given output or behavior.*
+
+The most useful, and most common type of specification
+
+Used for a "know when you're done" checkpoint (e.g., high-level feature specification)
+
+Great for preventing regressions
+
+Can be used at any level in the application:
+  - complete end-to-end specs
+  - single module
+  - anywhere in between
+
+]
+
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Spies, Stubs, Mocks
+
+.small[
+### Spy
+]
+
+<img src="images/spy.jpg" width="20%" class="thumb-right" />
+A function which stores information about calls, but does not alter the
+behavior of the original function
+
+.small[
+### Stub
+]
+
+<img src="images/stump.jpg" width="20%" class="thumb-left" />
+A function which intercepts calls to the original, stores information about
+calls, and allows the developer to alter the return value of the function.
+You may also hear these called "doubles"
+
+.small[
+### Mock
+]
+
+<img src="images/mockery.jpg" width="20%" class="thumb-right" />
+An object that acts as a drop-in replacement for another, and asserts that
+particular method calls were made&mdash;assertion is done *directly* by the mock
+object, not as an external check.
+
+]
+
+
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+]
+.right-column[
+
+## Spies, Stubs, Mocks
+
+Spies, Stubs, and Mocks are .medium[most useful] in .medium[Unit] specs, and
+.medium[Functional] specs
+
+Occasionally, you may write a .medium[*partial* end-to-end] spec and
+.medium[stub out a subsystem] like the database, filesystem, or a 3rd-party API.
+
+Use .medium[spies or mocks] when you want to specify that an object should
+.medium[pass messages] to another object
+
+Use .medium[stubs] when you need to .medium[force state]
+
+]
+---
+
+.left-column[
+## Red, Green, Refactor
+## BDD Thinking
+## Tools
+## JS Libraries
+]
+.right-column[
+
+## Mocha: Test suite and runner
+
+A domain-specific language for describing behaviors in (mostly) English
+
+http://mochajs.org/
+
+## Chai:  Expectation library
+
+A library for asserting expectations in your specs
+
+http://chaijs.com/
+
+## Sinon: Stubs, Spies, and Mocks
+
+If you must use spies, stubs, or mocks, sinon is the way to go.
+
+http://sinonjs.org/
+]
+
+---
+
+## Resources
+
+.resources[
+
+#### Working Effectively With Legacy Software
+.author[by Michael Feathers]
+http://objectmentor.com/resources/articles/WorkingEffectivelyWithLegacyCode.pdf
+
+#### The Failures of "Intro to TDD"
+.author[by Justin Searls]
+http://blog.testdouble.com/posts/2014-01-25-the-failures-of-intro-to-tdd.html
+
+#### TDD is BS — some clarification on TDD
+.author[by Dr. Kevin Goslar]
+http://blog.originate.com/blog/2014/02/20/tdd-is-bs/
+
+#### Refactoring: Improving the Design of Existing Software
+.author[by Martin Fowler]
+
+#### Extreme Programming Explained
+.author[by Kent Beck]
+http://www.amazon.com/dp/0321278658/
+
+#### *Architecture: The Lost Years*
+.author[by Robert C. Martin]
+http://confreaks.tv/videos/rubymidwest2011-keynote-architecture-the-lost-years
+
+]
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

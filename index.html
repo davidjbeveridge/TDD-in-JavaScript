@@ -28,6 +28,7 @@ layout: false
 ]
 .right-column[
 
+* Why TDD?
 * What is (and isn't) TDD?
 * How do I TDD?
 * Questions
@@ -42,6 +43,97 @@ layout: false
 .right-column[
 * Performance Testing
 * Tool comparison
+
+]
+
+---
+class: center, middle, inverse
+
+# Why TDD?
+
+---
+
+.left-column[
+## Legacy Code
+]
+.right-column[
+## According to WikiPedia.red[†]
+
+* source code that relates to a .medium[no-longer supported] or manufactured operating
+  system or other computer technology
+
+* code inserted into modern software for the purpose of .medium[maintaining] an older or
+  .medium[previously supported] feature
+
+* code that .medium[no longer runs] on a later version of a system, or requires a
+  compatibility layer
+
+.footnote[
+.red[†] https://en.wikipedia.org/wiki/Legacy_code
+]
+]
+
+---
+
+.left-column[
+## Legacy Code
+]
+.right-column[
+## According to Michael Feathers.red[†]
+
+> The main thing that distinguishes .medium[legacy code] from non-legacy code is tests,
+> or rather a .medium[lack of tests]. [...]
+
+> Most of the fear involved in making changes to large code bases is
+> .large[fear] of introducing subtle bugs; fear of changing things inadvertently. [...] 
+
+> With tests, you can make things better with impunity [...]
+
+> Without them, you just .medium[don’t know] whether things are getting better or worse.  
+
+]
+.footnote[
+.red[†] http://objectmentor.com/resources/articles/WorkingEffectivelyWithLegacyCode.pdf
+]
+
+---
+
+.left-column[
+## Legacy Code
+]
+.right-column[
+.center[
+<img src="images/yoda.png" />
+]
+
+## “.medium[Fear] is the path to the dark side. Fear leads to .medium[anger].  Anger leads to .medium[hate]. Hate leads to .medium[suffering].”
+]
+
+---
+
+.left-column[
+## Legacy Code
+]
+.right-column[
+## According to Me.red[†]
+
+.medium[Legacy code] is
+
+> Code with .medium[undocumented/unknown behavior]
+
+> Code that is .medium[difficult to understand]
+
+> Code that is .medium[difficult to change]
+
+> Code that was written by the last group of contractors
+
+> Code written by other developers
+
+> .medium[Code I wrote yesterday]
+
+.footnote[
+.red[†] [./index.html#7](./index.html#7)
+]
 
 ]
 
@@ -164,8 +256,8 @@ class: center, middle, inverse
 .right-column[
 ## In BDD
 
-* Specifications are written before code, on an as-you-go basis
-* BDD is a design tool
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
 ]
 
 ---
@@ -197,8 +289,8 @@ class: center, middle, inverse
 ### What is BDD?
 ]
 .right-column[
-* Specifications are written before code, on an as-you-go basis
-* BDD is a design tool
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
   - Just another constraint on your implementation
   - Forces an explicit public interface
   - Helps you reason about the boundaries of your solution
@@ -213,9 +305,9 @@ class: center, middle, inverse
 ### What is BDD?
 ]
 .right-column[
-* Specifications are written before code, on an as-you-go basis
-* BDD is a design tool
-* BDD is a debugging tool
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
+* BDD is a .medium[debugging tool]
 ]
 
 ---
@@ -224,9 +316,9 @@ class: center, middle, inverse
 ### What is BDD?
 ]
 .right-column[
-* Specifications are written before code, on an as-you-go basis
-* BDD is a design tool
-* BDD is a debugging tool
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
+* BDD is a .medium[debugging tool]
   - Automatically re-runs tests
   - Displays a stack trace
   - Making a single change at a time helps find bugs faster
@@ -238,10 +330,10 @@ class: center, middle, inverse
 ### What is BDD?
 ]
 .right-column[
-* Specifications are written before code, on an as-you-go basis
-* BDD is a design tool
-* BDD is a debugging tool
-* Proof of correctness
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
+* BDD is a .medium[debugging tool]
+* .medium[Proof] of correctness
 ]
 
 ---
@@ -275,11 +367,10 @@ class: center, middle, inverse
 ### What is BDD?
 ]
 .right-column[
-* Specifications for software's behavior
-  - Writen before your implementation
-* Design Tool
-* Debugging Tool
-* Proof of correctness
+* Specifications are written .medium[before code], on an .medium[as-you-go] basis
+* BDD is a .medium[design tool]
+* BDD is a .medium[debugging tool]
+* .medium[Proof] of correctness
   - Requires intelligible program requirements
   - Adequate proof of correct behavior (i.e., covers all edge cases)
   - Reasoned and written along with the program, not afterward
@@ -326,10 +417,10 @@ class: center, middle, inverse
 ]
 .right-column[
 * Less remembering stuff
-* Fast feedback about your code
-* Clear boundaries for refactoring
+* Fast .medium[feedback] about your code
+* Clear boundaries for .medium[refactoring]
 * (Some) assurance against regression
-* A design document your team can read
+* A design .medium[document] your team can read
 * Complements existing tools
 ]
 
@@ -374,11 +465,11 @@ http://cleancoders.com/category/solid-principles#videos
 
 Martin C. Fowler
 
-noun: a *change* made to the internal *structure of software* to make it easier
-to understand and cheaper to modify *without changing its observable behavior*
+noun: a .medium[change] made to the internal .medium[structure of software] to make it easier
+to understand and cheaper to modify .medium[without changing] its observable behavior
 
 verb: to restructure software by applying a series of refactorings without
-changing its observable behavior
+changing its .medium[observable behavior]
 
 http://refactoring.com/
 ]
@@ -440,7 +531,7 @@ What will this feature do?
 
 Where might I start?
 
-**What might be a convenient interface for that?** .red[†]
+**What .medium[might] be a .medium[convenient interface] for that?** .red[†]
 
 .footnote[
 .red[†] This is the most important question for BDD
@@ -460,15 +551,15 @@ Where might I start?
 <img src="images/dirty-harry.jpg" style="max-width: 35%; float: right" />
 ### Ask yourself...
 
-Why is this so darn hard?
+.medium[Why] is this so darn hard?
 
-Is this object/method handling too many responsibilities?
+Is this object/method handling .medium[too many responsibilities]?
 
-How can I avoid making a decision?
+How can I .medium[avoid making a decision]?
 
 Is there a more convenient way to think about this interface?
 
-How could the code be clearer?
+How could the code be .medium[clearer]?
 ]
 
 ---
@@ -517,7 +608,7 @@ describe('TodoController', function(){
 
 There are other specification formats, like Gherkin.red[†]
 
-<img src="images/pickle.jpg" style="max-width: 150px" />
+.center[<img src="images/pickle.jpg" style="max-width: 150px" />]
 
 ```gherkin
 Given I am signed into the Todo application

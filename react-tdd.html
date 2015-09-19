@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BDD with React.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="all" />
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse
+
+# Behavior-Driven Development with
+# [React.js](https://facebook.github.io/react)
+
+---
+
+.left-column[
+## What is a Component?
+]
+.right-column[
+- React.DOM nodes
+  - Abstraction over a Virtual DOM
+    - Automatic diffing prevents unnecessary re-render
+    - Render can also be forced or prevented
+- Custom nodes are *Objects*
+  - Follow the component lifecycle
+  - Can embed other components
+  - Defined with either
+    - `class MyComponent extends React.Component {}`
+    - `React.createClass({})`
+  - Instantiated via JSX or vanilla-js
+
+```javascript
+&lt;MyComponent foo="bar"&gt;
+  &lt;Child&gt;
+  &lt;Child&gt;
+&lt;/MyComponent&gt;
+```
+
+```javascript
+React.createElement(MyComponent, {foo: "bar"}, [
+  React.createElement(Child),
+  React.createElement(Child)
+])
+```
+]
+
+---
+
+.left-column[
+## What is a Component?
+## Props &amp; State
+]
+.right-column[
+
+### `props`
+
+- Passed in by a parent
+- *Never* change `props` from within a component
+
+```javascript
+// Good:
+&lt;MyComponent foo="bar"&gt;
+
+// Bad:
+this.props.foo = "baz"
+otherComponent.props.foo = "wham!"
+```
+
+### `state`
+
+- Set and managed internally by a component
+- *Never* change `state` from outside a component
+
+```javascript
+// Good:
+this.setState({foo: "bar"})
+
+// Bad
+this.state.foo = "baz"
+otherComponent.setState({foo: "bang"})
+otherComponent.state.foo = "kapow!"
+```
+]
+
+---
+
+.left-column[
+## What is a Component?
+## Props &amp; State
+]
+.right-column[
+## Working with a component:
+
+- `getDOMNode`
+- `setState`
+
+Use w/ caution:
+- `replaceState`
+- `foreceUpdate`
+- `isMounted`
+
+Don't use:
+- `setProps`
+- `replaceProps`
+
+]
+
+---
+
+.left-column[
+## What is a Component?
+## Props &amp; State
+## Children
+]
+.right-column[
+## Special `props`: Children
+
+```javascript
+&lt;MyComponent&gt;
+  &lt;OtherComponent /&gt;
+  &lt;OtherComponent /&gt;
+&lt;/MyComponent&gt;
+```
+
+Child components show up as `this.props.children`
+
+- When multiple children are passed, this is an `Array`
+- If only one child is passed, `this.props.children` is just that child
+]
+
+---
+.left-column[
+## What is a Component?
+## Props &amp; State
+## Children
+]
+.right-column[
+## Special methods for Children
+
+### `React.Children`
+
+- `map`
+- `forEach`
+- `count`
+- `only`
+]
+
+---
+
+.left-column[
+## What is a Component?
+## Props &amp; State
+## Children
+## Setup &amp; Definition
+]
+.right-column[
+
+## Setting Component Defaults
+
+- `getInitialState()`
+- `getDefaultProps()`
+- `propTypes`
+- `mixins`
+- `statics`
+
+]
+
+---
+
+.left-column[
+## What is a Component?
+## Props &amp; State
+## Children
+## Setup &amp; Definition
+## Component Lifecycle
+]
+.right-column[
+
+## In order:
+
+- `componentWillMount`
+- `componentDidMount`
+- `componentWillReceiveProps`
+- `shouldComponentUpdate`
+- `componentWillUpdate` .red[†]
+- `render`
+- `componentWillUnmount`
+
+.footnote[
+.red[†] *Note: Can't call setState from here on out*
+]
+]
+
+---
+
+class: center, middle, inverse
+
+# Testing utilities
+# [React.addons.TestUtils](https://facebook.github.io/react/docs/test-utils.html)
+
+---
+
+.left-column[
+## Get node info
+]
+.right-column[
+
+- `isElement`
+- `isElementOfType`
+- `isDOMComponent`
+- `isDOMComponentElement`
+- `isCompositeComponent`
+- `isCompositeComponentWithType`
+- `isCompositeComponentElement`
+- `isCompositeComponentElementWithType`
+]
+
+---
+
+.left-column[
+## Get node info
+## Find a DOM node
+]
+.right-column[
+## "Scry" methods
+
+- `scryRenderedDOMComponentsWithClass`
+- `scryRenderedDOMComponentsWithTag`
+- `scryRenderedComponentsWithType`
+
+## "Find" methods
+
+- `findAllInRenderedTree`
+- `findRenderedDOMComponentWithClass`
+- `findRenderedDOMComponentWithTag`
+- `findRenderedComponentWithType`
+
+]
+
+---
+
+.left-column[
+## Get node info
+## Find a DOM node
+## Rendering In Specs
+]
+.right-column[
+## Full Render
+- `mockComponent`
+  - allows you to mock out a child
+- `renderIntoDocument`
+  - renders a component for testing
+  - returns an instance of the component
+  - gives you the full, real component, with children rendered, too
+  - usage:
+
+```javascript
+var component = TestUtils.renderIntoDocument(MyComponent({
+  // props
+}, [
+  //children
+]));
+```
+]
+
+---
+
+.left-column[
+## Get node info
+## Find a DOM node
+## Rendering In Specs
+## Shallow Rendering
+]
+.right-column[
+## Checking Content
+- `createRenderer`
+  - makes a renderer for "shallow rendering"
+  - shallow-rendered components are an interface for making assertions about the output of the component's render method
+
+```javascript
+var shallowRenderer = TestUtils.createRenderer();
+
+shallowRenderer.render(MyComponent);
+result = shallowRenderer.getRenderOutput();
+expect(result.type).toBe('div');
+expect(result.props.children).toEqual([
+  &lt;span className="heading"&gt;Title&lt;/span&gt;,
+  &lt;Subcomponent foo="bar" /&gt;
+]);
+```
+
+]
+---
+
+.left-column[
+## Get node info
+## Find a DOM node
+## Rendering In Specs
+## Shallow Rendering
+## Simulating events
+]
+.right-column[
+## Fake it til you make it
+
+- `React.addons.TestUtils.Simulate.{eventName}`
+  - Used for simulating events on React Components
+- Must be called on a DOM node, not a Component
+- Examples:
+  - `click`
+  - `focus`
+  - `keyUp`/`keyDown`
+
+```javascript
+var node = React.findDOMNode(this.refs.input);
+node.value = 'A bad thing happened'
+React.addons.TestUtils.Simulate.change(node);
+React.addons.TestUtils.Simulate.keyDown(node, {
+  key: "Enter",
+  keyCode: 13,
+  which: 13
+});
+```
+]
+
+---
+
+.left-column[
+## What do I spec?
+]
+.right-column[
+- Features
+- Functional spec at View level
+  - UI Event-driven specs
+- Unit-level
+  - UI: Spec interactions
+  - UI: Spec delegation to other modules
+  - Models: spec non-free logic
+]
+
+---
+
+.left-column[
+## What do I spec?
+]
+.right-column[
+### Feature spec
+
+```txt
+Story:
+
+As a developer
+I want to add a feedback item to the retrospective
+To improve communication about the project
+
+Acceptance Criteria:
+
+Given I am editing the retrospective
+When I check the "Sad" checkmark
+And I enter "I failed to deliver my features this week"
+  in the text box
+And I press the Enter key
+Then I should see "I failed to deliver my features this week"
+  appear under the "Sad" list
+```
+
+.footnote[
+.red[&raquo;]
+When we code, we'll actually the feature spec, because I didn't set up the tools
+]
+]
+
+---
+
+.left-column[
+## What do I spec?
+]
+.right-column[
+### Functional spec
+
+```javascript
+describe('FeedbackItemEntryForm', function () {
+  describe('UI Events', function () {
+
+    beforeEach(function(){
+      this.entryForm = TestUtils.renderIntoDocument(FeedbackItemEntryForm({
+        FeedBackItem: { create: sinon.spy() }
+      }))
+    });
+
+    context('when the Enter key is pressed', function () {
+
+      beforeEach(function(){
+        var node = React.findDOMNode(this.entryForm.refs.input);
+        node.value = 'A bad thing happened'
+        React.addons.TestUtils.Simulate.change(node);
+        React.addons.TestUtils.Simulate.keyDown(node, {
+          key: "Enter",
+          keyCode: 13,
+          which: 13
+        });
+      });
+
+      it('creates a new FeedBackItem', function () {
+        expect(FeedBackItem.create).to.be.calledWithMatch({
+          text: "A good thing happened"
+        });
+      });
+
+    });
+  });
+});
+```
+]
+
+---
+
+.left-column[
+## What do I spec?
+]
+.right-column[
+### Unit spec(s)
+
+```javascript
+describe('FeedbackItemEntryForm', function () {
+  describe('#save', function () {
+    context('if there is content in the box', function () {
+      it('creates a new FeedBackItem');
+      it('clears the form');
+    });
+    context('if there is no content in the box', function () {
+      it('creates a new FeedBackItem');
+      it('sets the error state');
+    });
+  });
+
+  describe('#clearForm');
+
+  describe('#errorClass');
+});
+```
+]
+
+---
+
+.left-column[
+## What do I spec?
+]
+.right-column[
+### Unit spec(s)
+
+```javascript
+describe('FeedBackItem', function () {
+  describe('#validate', function () {
+    context('if the text is empty', function () {
+      it('returns an error');
+    });
+    context('if it all checks out', function () {
+      it('returns null');
+    });
+  });
+});
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Questions?
+
+---
+
+class: center, middle, inverse
+
+# Let's code!
+    </textarea>
+    <script src="scripts/remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

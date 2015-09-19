@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BDD with Backbone.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="all" />
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse
+
+# Behavior-Driven Development with
+# [Backbone.js](http://backbonejs.org/)
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+]
+.right-column[
+## Models
+
+- Data store
+- Optionally persistent
+- Evented
+- Can encapsulate Domain Models (e.g., User, TodoItem)
+- Can encapsulate View Models (e.g., buttonState, modalOpen, displayText, etc.)
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+]
+.right-column[
+## Views
+
+- map directly to DOM
+- highly stateful
+- UI state is managed through a combination of:
+  - domain model state
+  - View state
+  - DOM state
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+]
+.right-column[
+## Testing utilities
+
+- Do not exist.
+- Backbone models/views are simple enough to test w/ standard tools
+- Some 3rd-party libs exist for backbone-specific testing, e.g.,
+  [chai-backbone](http://chaijs.com/plugins/chai-backbone)
+]
+
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+## What do I spec?
+]
+.right-column[
+- Features
+- Functional spec at View level
+  - UI Event-driven specs
+- Unit-level
+  - UI: Spec interactions
+  - UI: Spec delegation to other modules
+  - Models: spec non-free logic
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+## What do I spec?
+]
+.right-column[
+### Feature spec
+
+```txt
+Story:
+
+As a developer
+I want to add a feedback item to the retrospective
+To improve communication about the project
+
+Acceptance Criteria:
+
+Given I am editing the retrospective
+When I check the "Sad" checkmark
+And I enter "I failed to deliver my features this week"
+  in the text box
+And I press the Enter key
+Then I should see "I failed to deliver my features this week"
+  appear under the "Sad" list
+```
+
+.footnote[
+.red[&raquo;]
+When we code, we'll actually the feature spec, because I didn't set up the tools
+]
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+## What do I spec?
+]
+.right-column[
+### Functional spec
+
+```javascript
+describe('FeedbackItemEntryForm', function () {
+
+  describe('UI Events', function () {
+
+    beforeEach(function(){
+      // make an instance of the view to play with:
+      this.entryForm = new FeedbackItemEntryForm({
+        // and inject a mock FeedBackItem
+        FeedBackItem: { create: sinon.spy() }
+      });
+    });
+
+    context('when the Enter key is pressed', function () {
+
+      beforeEach(function(){
+        var pressEnter = $.Event('keyup', { which: 13 });
+        this.entryForm.textBox().value("A good thing happened");
+        this.entryForm.textBox().trigger(pressEnter);
+      });
+
+      it('creates a new FeedBackItem', function () {
+        expect(FeedBackItem.create).to.be.calledWithMatch({
+          text: "A good thing happened"
+        });
+      });
+
+    });
+  });
+});
+```
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+## What do I spec?
+]
+.right-column[
+### Unit spec(s)
+
+```javascript
+describe('FeedbackItemEntryForm', function () {
+  describe('#save', function () {
+    context('if there is content in the box', function () {
+      it('creates a new FeedBackItem');
+      it('clears the form');
+    });
+    context('if there is no content in the box', function () {
+      it('creates a new FeedBackItem');
+      it('sets the error state');
+    });
+  });
+
+  describe('#clearForm');
+
+  describe('#errorClass');
+});
+```
+]
+
+---
+
+.left-column[
+## What do we get w/ Backbone?
+## What do I spec?
+]
+.right-column[
+### Unit spec(s)
+
+```javascript
+describe('FeedBackItem', function () {
+  describe('#validate', function () {
+    context('if the text is empty', function () {
+      it('returns an error');
+    });
+    context('if it all checks out', function () {
+      it('returns null');
+    });
+  });
+});
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Questions?
+
+---
+
+class: center, middle, inverse
+
+# Let's code!
+
+    </textarea>
+    <script src="scripts/remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
